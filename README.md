@@ -6,6 +6,12 @@ This web application serves as a user interface for the [Logic MCP Server](https
 
 The application is built with HTML, CSS, and vanilla JavaScript, focusing on clarity and ease of use to demonstrate and control the backend server's functionalities.
 
+![image](https://github.com/user-attachments/assets/99dfbf19-367b-46d1-b94f-dae44103fdd9)
+![image](https://github.com/user-attachments/assets/076be2f6-742e-4357-b554-9ce154e129bb)
+![image](https://github.com/user-attachments/assets/de9e8546-2425-4fac-a186-a7df8469dcdb)
+![image](https://github.com/user-attachments/assets/a7b25899-da67-4c2c-be22-7ef43a7b1260)
+![image](https://github.com/user-attachments/assets/6013f812-7a28-4d7a-8b4b-d554b0d15c27)
+
 ## Demonstration: Logic MCP Server in Action
 
 The Logic MCP Server, which this web application interacts with, is capable of complex reasoning. Watch a demonstration of the server attempting to solve the "Passport Pandemonium" logic puzzle:
