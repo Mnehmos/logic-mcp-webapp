@@ -97,8 +97,34 @@ document.addEventListener('DOMContentLoaded', () => {
             `;
             chainCard.addEventListener('click', () => {
                 console.log('Chain clicked:', chain.chain_id);
+                // Store chain_id in modalBody's dataset to be accessible by renderOperationsInModal
+                modalBody.dataset.currentChainId = chain.chain_id;
                 fetchAndDisplayOperations(chain.chain_id);
             });
+            
+            const copyChainBtn = document.createElement('button');
+            copyChainBtn.textContent = 'Copy Chain Info';
+            copyChainBtn.classList.add('copy-chain-info-btn');
+            copyChainBtn.style.marginLeft = '10px'; // Basic styling
+            copyChainBtn.addEventListener('click', (event) => {
+                event.stopPropagation(); // Prevent triggering the chain card click
+                const chainInfoToCopy = {
+                    chainId: chain.chain_id,
+                    chainName: chain.chain_name || 'N/A',
+                    description: chain.description || 'N/A', // Assuming description is available on chain object
+                    createdAt: chain.created_at ? new Date(chain.created_at).toLocaleString() : 'N/A',
+                    rootOperationId: chain.root_operation_uuid || 'N/A',
+                    operationCount: chain.operation_count || 0
+                };
+                const textToCopy = JSON.stringify(chainInfoToCopy, null, 2);
+                navigator.clipboard.writeText(textToCopy).then(() => {
+                    alert('Chain info copied to clipboard!');
+                }).catch(err => {
+                    console.error('Failed to copy chain info:', err);
+                    alert('Failed to copy chain info.');
+                });
+            });
+            chainCard.appendChild(copyChainBtn); // Add button to the card
             chainsContainer.appendChild(chainCard);
         });
     }
@@ -126,6 +152,14 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
+        // Retrieve chain_id from a global variable or pass it to this function
+        // For now, assuming it's available via a clicked element's dataset or a global var
+        // This needs to be set when fetchAndDisplayOperations is called.
+        // Let's assume currentChainIdForModal is set globally when a chain is clicked.
+        // This is a simplification; a more robust solution would pass chainId explicitly.
+        const currentChainIdForModal = modalBody.dataset.currentChainId || "UNKNOWN_CHAIN_ID";
+
+
         operations.forEach(operation => {
             const operationCard = document.createElement('div');
             operationCard.classList.add('operation-card');
@@ -141,21 +175,54 @@ document.addEventListener('DOMContentLoaded', () => {
                     const parsedData = typeof data === 'string' ? JSON.parse(data) : data;
                     return `<pre>${JSON.stringify(parsedData, null, 2)}</pre>`;
                 } catch (e) {
-                    return `<pre>${data}</pre>`; // Not JSON, display as is within pre
+                    // If it's not JSON, or already an object, display its string representation
+                    return `<pre>${typeof data === 'object' ? JSON.stringify(data, null, 2) : data}</pre>`;
                 }
             };
+            
+            let modelUsedInfo = '';
+            if (operation.output_data && typeof operation.output_data === 'object' && operation.output_data.model_used) {
+                modelUsedInfo = `<p><strong>Model Used:</strong> ${operation.output_data.model_used}</p>`;
+            }
+
 
             operationCard.innerHTML = `
                 <h4>Operation ID: ${operation.operation_id}</h4>
                 <p><strong>Operation Name:</strong> ${operation.operation_name || 'N/A'}</p>
                 <p><strong>Primitive:</strong> ${operation.primitive_name || 'N/A'}</p>
+                ${modelUsedInfo}
                 <p><strong>Status:</strong> ${operation.status || 'N/A'}</p>
                 <p><strong>Start Time:</strong> ${startTime}</p>
                 <p><strong>End Time:</strong> ${endTime}</p>
                 <p><strong>Input Data:</strong> ${formatJson(operation.input_data)}</p>
                 <p><strong>Output Data:</strong> ${formatJson(operation.output_data)}</p>
                 <p><strong>Context:</strong> ${formatJson(operation.context)}</p>
+                <button class="copy-operation-info-btn">Copy Operation Info</button>
             `;
+            
+            const copyBtn = operationCard.querySelector('.copy-operation-info-btn');
+            copyBtn.addEventListener('click', () => {
+                const opInfoToCopy = {
+                    chainId: currentChainIdForModal, // Make sure this is correctly sourced
+                    operationId: operation.operation_id,
+                    operationName: operation.operation_name || 'N/A',
+                    primitiveName: operation.primitive_name || 'N/A',
+                    modelUsed: (operation.output_data && typeof operation.output_data === 'object' && operation.output_data.model_used) ? operation.output_data.model_used : 'N/A',
+                    status: operation.status || 'N/A',
+                    startTime: startTime,
+                    endTime: endTime,
+                    inputData: operation.input_data, // Raw data for easier machine parsing
+                    outputData: operation.output_data, // Raw data
+                    context: operation.context // Raw data
+                };
+                const textToCopy = JSON.stringify(opInfoToCopy, null, 2);
+                navigator.clipboard.writeText(textToCopy).then(() => {
+                    alert('Operation info copied to clipboard!');
+                }).catch(err => {
+                    console.error('Failed to copy operation info:', err);
+                    alert('Failed to copy operation info.');
+                });
+            });
             modalBody.appendChild(operationCard);
         });
     }
@@ -254,18 +321,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 if (config.is_default && config.is_immutable) {
                     specialNotes = ' (Default, Immutable)';
-                    // For the default, "Active" means no other user config is active.
-                    // The activate button is not shown. Delete button is not shown.
-                } else {
+                    // Show activate button for default, but no delete button.
+                    // The ID "SERVER_DEFAULT_CONFIG" is used for activating the default.
+                    // Use appropriate .btn classes for styling
                     buttonsHtml = `
-                        <button data-id="${config.id}" class="activate-llm-config">Activate</button>
-                        <button data-id="${config.id}" class="delete-llm-config">Delete</button>
+                        <button data-id="SERVER_DEFAULT_CONFIG" class="activate-llm-config btn btn-secondary">Activate Default</button>
                     `;
-                }
-                
-                // If it's the default and active, make it clear it's the active default
-                if (config.is_default && (config.is_active === true || config.is_active === 1)) {
-                    activeStatusText = 'Yes (Implicitly Active Default)';
+                     // If it's the default and active (meaning no other user config is active), reflect this.
+                    if (config.is_active === true || config.is_active === 1) {
+                         activeStatusText = 'Yes (Active Default)';
+                    } else {
+                        // If a user config is active, the default shows as 'No' but is still activatable.
+                        activeStatusText = 'No';
+                    }
+
+                } else { // For user-defined, non-immutable configs
+                    buttonsHtml = `
+                        <button data-id="${config.id}" class="activate-llm-config btn btn-primary">Activate</button>
+                        <button data-id="${config.id}" class="delete-llm-config btn btn-danger">Delete</button>
+                    `;
                 }
 
 

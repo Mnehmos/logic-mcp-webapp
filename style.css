@@ -1,45 +1,127 @@
 body {
-    font-family: Arial, sans-serif;
-    margin: 20px;
-    background-color: #f4f4f4;
-    color: #333;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    margin: 0;
+    padding: 20px;
+    background-color: #f0f2f5; /* Slightly softer background */
+    color: #1d2129; /* Darker text for better contrast */
+    line-height: 1.6;
 }
 
 #app-container {
     max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin: 20px auto; /* Added top/bottom margin */
+    padding: 25px; /* Increased padding */
+    background-color: #ffffff;
+    border-radius: 10px; /* Slightly more rounded */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Softer, more diffused shadow */
 }
+
+h1, h2, h3, h4 {
+    color: #1c1e21; /* Consistent darker heading color */
+}
+
+/* General Button Styling */
+.btn {
+    display: inline-block;
+    font-weight: 600;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    user-select: none;
+    background-color: transparent;
+    border: 1px solid transparent;
+    padding: 0.5rem 1rem; /* Adjusted padding */
+    font-size: 0.9rem; /* Slightly smaller base font size for buttons */
+    line-height: 1.5;
+    border-radius: 0.3rem; /* Consistent border radius */
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    margin-right: 5px; /* Add some space between buttons */
+    margin-bottom: 5px; /* Add some space if buttons wrap */
+}
+
+.btn:hover {
+    text-decoration: none;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+}
+.btn-primary:hover {
+    background-color: #0069d9;
+    border-color: #0062cc;
+}
+
+.btn-danger {
+    color: #fff;
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+.btn-danger:hover {
+    background-color: #c82333;
+    border-color: #bd2130;
+}
+
+.btn-info {
+    color: #fff;
+    background-color: #17a2b8;
+    border-color: #17a2b8;
+}
+.btn-info:hover {
+    background-color: #138496;
+    border-color: #117a8b;
+}
+
+.btn-secondary {
+    color: #fff;
+    background-color: #6c757d;
+    border-color: #6c757d;
+}
+.btn-secondary:hover {
+    background-color: #5a6268;
+    border-color: #545b62;
+}
+
 
 #chains-container {
     display: flex;
     flex-wrap: wrap;
-    gap: 20px;
-    margin-top: 20px;
+    gap: 25px; /* Increased gap */
+    margin-top: 25px; /* Increased margin */
 }
 
 .chain-card {
-    background-color: #e9e9e9;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    padding: 15px;
-    width: calc(33% - 20px); /* Three cards per row with gap */
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    background-color: #ffffff; /* Brighter card background */
+    border: 1px solid #e0e0e0; /* Lighter border */
+    border-radius: 8px; /* More rounded */
+    padding: 20px; /* Increased padding */
+    width: calc(33.333% - 25px); /* Adjusted for new gap */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08); /* Slightly more pronounced shadow */
     cursor: pointer;
-    transition: transform 0.2s ease-in-out;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    display: flex; /* For aligning items if needed */
+    flex-direction: column; /* Stack content vertically */
+    justify-content: space-between; /* Push button to bottom if card height varies */
 }
 
 .chain-card:hover {
     transform: translateY(-5px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12); /* Enhanced hover shadow */
 }
 
 .chain-card h3 {
     margin-top: 0;
+    margin-bottom: 10px; /* Added margin */
     color: #0056b3;
+    font-size: 1.1rem; /* Slightly adjusted font size */
 }
+.chain-card p {
+    font-size: 0.9rem;
+    margin-bottom: 8px;
+    color: #495057;
+}
+
 
 .modal {
     display: none; /* Hidden by default */
@@ -75,147 +157,173 @@ body {
 }
 
 .operation-card {
-    background-color: #f0f8ff; /* Light blue background */
-    border: 1px solid #cce7ff;
-    border-radius: 5px;
-    padding: 10px 15px;
-    margin-bottom: 10px;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    background-color: #f8f9fa; /* Lighter, cleaner background */
+    border: 1px solid #dee2e6; /* Softer border */
+    border-radius: 6px; /* Consistent rounding */
+    padding: 15px 20px; /* Increased padding */
+    margin-bottom: 15px; /* Increased margin */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06); /* Softer shadow */
 }
 
 .operation-card h4 {
     margin-top: 0;
+    margin-bottom: 10px; /* Added margin */
     color: #0056b3;
+    font-size: 1.05rem; /* Slightly adjusted */
+}
+.operation-card p {
+    font-size: 0.9rem;
+    margin-bottom: 6px;
 }
 
+
 .close-button {
-    color: #aaa;
+    color: #6c757d; /* Softer color */
     float: right;
-    font-size: 28px;
+    font-size: 2rem; /* Larger for easier clicking */
     font-weight: bold;
+    line-height: 1; /* Ensure it aligns well */
 }
 
 .close-button:hover,
 .close-button:focus {
-    color: black;
+    color: #343a40; /* Darker on hover */
     text-decoration: none;
     cursor: pointer;
 }
 
 #modal-body {
-    max-height: 70vh; /* Limit height to enable scrolling */
-    overflow-y: auto; /* Enable vertical scrolling */
-    padding-right: 15px; /* Prevent scrollbar from overlapping content */
+    max-height: 70vh;
+    overflow-y: auto;
+    padding-right: 15px;
 }
 
 .operation-card pre {
-    background-color: #eef;
-    border: 1px solid #ddd;
-    padding: 10px;
-    margin-top: 5px;
-    white-space: pre-wrap; /* Wrap long lines */
-    word-break: break-all; /* Break words to prevent overflow */
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 0.9em;
-    max-height: 200px; /* Limit height for JSON blocks */
-    overflow-y: auto; /* Enable scrolling for large JSON */
+    background-color: #e9ecef; /* Lighter pre background */
+    border: 1px solid #ced4da; /* Softer border for pre */
+    padding: 12px; /* Increased padding */
+    margin-top: 8px; /* Adjusted margin */
+    white-space: pre-wrap;
+    word-break: break-all;
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace; /* Better monospace stack */
+    font-size: 0.875em; /* Slightly smaller for dense info */
+    max-height: 250px; /* Slightly increased max-height */
+    overflow-y: auto;
+    border-radius: 4px; /* Rounded corners for pre */
 }
 
 #llm-configs-section {
     max-width: 1200px;
-    margin: 20px auto;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin: 30px auto; /* Increased margin */
+    padding: 25px; /* Increased padding */
+    background-color: #ffffff;
+    border-radius: 10px; /* Consistent rounding */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Consistent shadow */
 }
 
-#llm-configs-section h1 {
-    color: #333;
-    margin-bottom: 20px;
+#llm-configs-section h1, #logic-chains-section h1 { /* Target both section titles */
+    color: #1c1e21;
+    margin-bottom: 25px; /* Increased margin */
+    border-bottom: 1px solid #e0e0e0; /* Add a subtle separator */
+    padding-bottom: 10px; /* Space for the separator */
 }
+
 
 #llm-configs-list {
     display: flex;
     flex-wrap: wrap;
-    gap: 15px;
+    gap: 20px; /* Increased gap */
     margin-bottom: 30px;
 }
 
 .llm-config-item {
-    background-color: #f9f9f9;
-    border: 1px solid #eee;
-    border-radius: 5px;
-    padding: 15px;
-    width: calc(50% - 15px); /* Two items per row with gap */
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    background-color: #ffffff; /* Brighter card */
+    border: 1px solid #e0e0e0; /* Lighter border */
+    border-radius: 8px; /* Consistent rounding */
+    padding: 20px; /* Increased padding */
+    width: calc(50% - 20px); /* Adjusted for new gap */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08); /* Consistent shadow */
+    display: flex;
+    flex-direction: column;
 }
 
 .llm-config-item p {
-    margin: 5px 0;
-    font-size: 0.95em;
+    margin: 6px 0; /* Adjusted margin */
+    font-size: 0.9rem; /* Consistent font size */
+    color: #495057;
 }
 
 .llm-config-item strong {
-    color: #555;
+    color: #343a40; /* Darker strong text */
 }
 
-.llm-config-item button {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 8px 12px;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 0.9em;
-    margin-top: 10px;
-    transition: background-color 0.2s ease;
+/* Apply .btn styles to buttons within .llm-config-item */
+.llm-config-item .activate-llm-config {
+    /* Inherits from .btn, specific overrides if needed */
+}
+.llm-config-item .delete-llm-config {
+    /* Inherits from .btn, specific overrides if needed */
 }
 
-.llm-config-item button:hover {
-    background-color: #0056b3;
+/* Ensure buttons in llm-config-item use the new classes */
+.llm-config-item button { /* This will be a fallback if not using specific .btn-xxx classes */
+    margin-top: 15px; /* More space above buttons */
 }
+
 
 #add-llm-config-form {
-    background-color: #e9f7ef; /* Light green background for the form */
-    border: 1px solid #d4edda;
+    background-color: #f8f9fa; /* Lighter form background */
+    border: 1px solid #dee2e6; /* Softer border */
     border-radius: 8px;
-    padding: 20px;
-    margin-top: 20px;
+    padding: 25px; /* Increased padding */
+    margin-top: 30px; /* Increased margin */
 }
 
 #add-llm-config-form h2 {
     margin-top: 0;
-    color: #28a745; /* Green for form title */
+    margin-bottom: 20px; /* Added margin */
+    color: #007bff; /* Primary blue for form title */
 }
 
 #add-llm-config-form div {
-    margin-bottom: 15px;
+    margin-bottom: 18px; /* Increased margin */
 }
 
 #add-llm-config-form label {
     display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-    color: #333;
+    margin-bottom: 6px; /* Adjusted margin */
+    font-weight: 600; /* Slightly bolder */
+    color: #495057;
 }
 
 #add-llm-config-form input[type="text"],
 #add-llm-config-form input[type="password"],
 #add-llm-config-form select {
-    width: calc(100% - 22px); /* Adjust for padding and border */
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 1em;
+    width: 100%; /* Full width, box-sizing will handle padding */
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+    padding: 0.6rem 0.75rem; /* Adjusted padding */
+    border: 1px solid #ced4da; /* Softer border */
+    border-radius: 0.25rem; /* Standard radius */
+    font-size: 0.95em; /* Adjusted font size */
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+#add-llm-config-form input[type="text"]:focus,
+#add-llm-config-form input[type="password"]:focus,
+#add-llm-config-form select:focus {
+    border-color: #80bdff;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
 }
 
+
 #add-llm-config-form button[type="submit"] {
-    background-color: #28a745; /* Green submit button */
+    /* Will use .btn and .btn-primary if class is added in HTML */
+    /* Fallback styles if .btn .btn-primary not applied: */
+    background-color: #28a745;
     color: white;
     border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
+    padding: 0.6rem 1.2rem; /* Adjusted padding */
+    border-radius: 0.3rem;
     cursor: pointer;
     font-size: 1em;
     transition: background-color 0.2s ease;
@@ -223,4 +331,39 @@ body {
 
 #add-llm-config-form button[type="submit"]:hover {
     background-color: #218838;
+}
+
+/* Styling for new copy buttons */
+.copy-chain-info-btn, .copy-operation-info-btn {
+    /* These will use .btn and .btn-info if classes are added in script.js */
+    /* Fallback: */
+    background-color: #17a2b8;
+    color: white;
+    border: none;
+    padding: 6px 10px;
+    font-size: 0.85em;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-left: 5px; /* Space it out a bit */
+}
+.copy-chain-info-btn:hover, .copy-operation-info-btn:hover {
+    background-color: #138496;
+}
+
+/* Ensure specific buttons get the new classes via JS or direct HTML if possible,
+   otherwise, they might need individual styling here or use the general button tag selector.
+   The .llm-config-item button selector above is an example.
+*/
+#clear-all-llm-configs-btn, #clear-all-logic-chains-btn {
+    /* These should ideally have .btn .btn-danger applied in HTML/JS */
+    /* Fallback: */
+    background-color: #dc3545;
+    color: white;
+    padding: 0.6rem 1rem;
+    border-radius: 0.3rem;
+    border: 1px solid #dc3545;
+}
+#clear-all-llm-configs-btn:hover, #clear-all-logic-chains-btn:hover {
+    background-color: #c82333;
+    border-color: #bd2130;
 }
