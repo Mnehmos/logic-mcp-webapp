@@ -10,6 +10,30 @@
     <div id="app-container">
         <h1>Logic Chains</h1>
         <div id="chains-container"></div>
+        <button id="clear-all-logic-chains-btn">Clear All Logic Chains</button>
+    </div>
+
+    <div id="llm-configs-section">
+        <h1>LLM Configurations</h1>
+        <div id="llm-configs-list"></div>
+
+        <form id="add-llm-config-form">
+            <h2>Add New LLM Configuration</h2>
+            <div>
+                <label for="llm-provider">Provider:</label>
+                <select id="llm-provider" required>
+                    <!-- Options will be populated by script.js -->
+                </select>
+            </div>
+            <div>
+                <label for="llm-model-select">Model:</label>
+                <select id="llm-model-select" required disabled>
+                    <option value="">Select a provider first</option>
+                </select>
+            </div>
+            <button type="submit">Save LLM Configuration</button>
+        </form>
+        <button id="clear-all-llm-configs-btn">Clear All LLM Configurations</button>
     </div>
 
     <div id="modal-container" class="modal" style="display:none;">

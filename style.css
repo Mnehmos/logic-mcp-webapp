@@ -120,3 +120,107 @@ body {
     max-height: 200px; /* Limit height for JSON blocks */
     overflow-y: auto; /* Enable scrolling for large JSON */
 }
+
+#llm-configs-section {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#llm-configs-section h1 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+#llm-configs-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.llm-config-item {
+    background-color: #f9f9f9;
+    border: 1px solid #eee;
+    border-radius: 5px;
+    padding: 15px;
+    width: calc(50% - 15px); /* Two items per row with gap */
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.llm-config-item p {
+    margin: 5px 0;
+    font-size: 0.95em;
+}
+
+.llm-config-item strong {
+    color: #555;
+}
+
+.llm-config-item button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9em;
+    margin-top: 10px;
+    transition: background-color 0.2s ease;
+}
+
+.llm-config-item button:hover {
+    background-color: #0056b3;
+}
+
+#add-llm-config-form {
+    background-color: #e9f7ef; /* Light green background for the form */
+    border: 1px solid #d4edda;
+    border-radius: 8px;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+#add-llm-config-form h2 {
+    margin-top: 0;
+    color: #28a745; /* Green for form title */
+}
+
+#add-llm-config-form div {
+    margin-bottom: 15px;
+}
+
+#add-llm-config-form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #333;
+}
+
+#add-llm-config-form input[type="text"],
+#add-llm-config-form input[type="password"],
+#add-llm-config-form select {
+    width: calc(100% - 22px); /* Adjust for padding and border */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1em;
+}
+
+#add-llm-config-form button[type="submit"] {
+    background-color: #28a745; /* Green submit button */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.2s ease;
+}
+
+#add-llm-config-form button[type="submit"]:hover {
+    background-color: #218838;
+}
