@@ -6,6 +6,14 @@ This web application serves as a user interface for the [Logic MCP Server](https
 
 The application is built with HTML, CSS, and vanilla JavaScript, focusing on clarity and ease of use to demonstrate and control the backend server's functionalities.
 
+## Demonstration: Logic MCP Server in Action
+
+The Logic MCP Server, which this web application interacts with, is capable of complex reasoning. Watch a demonstration of the server attempting to solve the "Passport Pandemonium" logic puzzle:
+
+[![Logic MCP Solves Passport Pandemonium](https://img.youtube.com/vi/lFt_XrPvSIA/0.jpg)](https://www.youtube.com/watch?v=lFt_XrPvSIA)
+
+This web application can be used to explore the logic chains and operations generated during such a process.
+
 ## Features
 
 -   **LLM Configuration Management**:
